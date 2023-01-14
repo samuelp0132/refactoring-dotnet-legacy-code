@@ -5,21 +5,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Refactoring.Web.Models;
-using Refactoring.Web.Services.Helpers;
 
 namespace Refactoring.Web.Controllers {
     public class HomeController : Controller {
         private readonly ILogger<HomeController> _logger;
-        
+
         public HomeController(ILogger<HomeController> logger) {
             _logger = logger;
         }
-        
+
         public IActionResult Index() {
             _logger.LogDebug("Index loaded");
+            var districts = new List<string> {
+                "Cambridge", "Downtown", "County", "Middleton"
+            };
             var viewModel = new OrderFormModel {
-                Districts = District.All.Select(
-                    d => new SelectListItem {
+                Districts = districts.Select(d => new SelectListItem {
                     Value = d.ToLower(), 
                     Text = d
                 })

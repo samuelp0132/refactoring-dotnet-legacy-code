@@ -1,13 +1,8 @@
-using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Rectoring.Services;
-using Refactoring.Web.Services;
-using Refactoring.Web.Services.Helpers;
-using Refactoring.Web.Services.Interfaces;
 
 namespace Refactoring.Web
 {
@@ -24,16 +19,6 @@ namespace Refactoring.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<IChamberOfCommerceApi, ChamberOfCommerceApi>();
-            services.AddTransient<IOrderService, OrderService>();
-            services.AddTransient<IDealService, DealService>();
-            services.AddTransient<IDistrictOrderFactory, DistrictOrderFactory>();
-            services.AddTransient<IAdvertPrinter, IAdvertPrinter>();
-            
-            services.AddHttpClient<ChamberOfCommerceApi>(c =>
-            {
-                c.BaseAddress = new Uri(Configuration.GetValue<string>("BasePhotoUrl"));
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
